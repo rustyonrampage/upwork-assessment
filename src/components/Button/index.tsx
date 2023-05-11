@@ -14,5 +14,4 @@ function Button({ className, children, ...props }: Props) {
   );
 }
 
-
 export default Button;

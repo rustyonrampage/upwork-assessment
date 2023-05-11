@@ -3,8 +3,10 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Provider } from "react-redux";
 
 import Notes from "screens/Notes";
+import store from "redux/store";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -12,9 +14,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     {/* <RouterProvider router={router} /> */}
-    <BrowserRouter>
-      <Notes />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Notes />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 

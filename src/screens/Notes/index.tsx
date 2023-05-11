@@ -12,19 +12,20 @@ function Notes({}) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const onCreatePage = location.pathname === PATH_TO_CREATE;
+  const onHomePage = location.pathname === "/";
 
   return (
     <main className={styles.container}>
       <nav className={styles.nav}>
         <h3>Notes Application</h3>
-        <Button onClick={() => navigate(onCreatePage ? "/" : PATH_TO_CREATE)}>
-          {onCreatePage ? "Back" : "Add Note"}
+        <Button onClick={() => navigate(onHomePage ? PATH_TO_CREATE : "/")}>
+          {onHomePage ? "Add Note" : "Back"}
         </Button>
       </nav>
       <Routes>
         <Route path={"/"} Component={NoteList} />
         <Route path={PATH_TO_CREATE} Component={Note} />
+        <Route path={"/edit/:id"} Component={Note} />
       </Routes>
     </main>
   );
