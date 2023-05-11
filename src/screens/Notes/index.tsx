@@ -1,25 +1,33 @@
 import React from "react";
-import PropTypes from "prop-types";
-
 import styles from "./index.module.css";
-
 import NoteList from "components/NoteList";
 import Button from "components/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Note from "components/Note";
 
+const PATH_TO_CREATE = "/create-note";
+// pathname
 function Notes({}) {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const onCreatePage = location.pathname === PATH_TO_CREATE;
+
   return (
     <main className={styles.container}>
-      <div>
+      <nav className={styles.nav}>
         <h3>Notes Application</h3>
-        <Button onClick={()=>navigate("/create-note")}>Add Note</Button>
-      </div>
-      <NoteList />
+        <Button onClick={() => navigate(onCreatePage ? "/" : PATH_TO_CREATE)}>
+          {onCreatePage ? "Back" : "Add Note"}
+        </Button>
+      </nav>
+      <Routes>
+        <Route path={"/"} Component={NoteList} />
+        <Route path={PATH_TO_CREATE} Component={Note} />
+      </Routes>
     </main>
   );
 }
-
-Notes.propTypes = {};
 
 export default Notes;
